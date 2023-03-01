@@ -1,0 +1,109 @@
+import java.util.Random;
+
+public class Ordenenumeros {
+    public static void main(String[] args) {
+        int[] sizes = {100, 500, 1000, 5000, 10000};
+            for (int size : sizes) {
+                double[] arreglo = new double[size];
+                Random numero = new Random();
+            for (int i = 0; i < size; i++) {
+                arreglo[i] = numero.nextDouble();
+            }
+            long startTime, endTime;
+                System.out.println("El tiempo se mide en Nanosegundos para que sea visible el poco tiempo que se demora");
+                System.out.println("");
+                double[] arreglo_1 = arreglo.clone();
+                    startTime = System.nanoTime();
+                    bubbleSort(arreglo_1);
+                    endTime = System.nanoTime();
+                    System.out.println("Tiempo para metodo burbuja de " + size + " elementos: " + (endTime - startTime) + " nanosegundos");
+                double[] arreglo_2 = arreglo.clone();
+                    startTime = System.nanoTime();
+                    insertionSort(arreglo_2);
+                    endTime = System.nanoTime();
+                    System.out.println("Tiempo para metodo inserción de " + size + " elementos: " + (endTime - startTime) + " nanosegundos");
+                double[] arreglo_3 = arreglo.clone();
+                    startTime = System.nanoTime();
+                    selectionSort(arreglo_3);
+                    endTime = System.nanoTime();
+                    System.out.println("Tiempo para metodo selección de " + size + " elementos: " + (endTime - startTime) + " nanosegundos");
+                double[] arreglo_4 = arreglo.clone();
+                    startTime = System.nanoTime();
+                    mergeSort(arreglo_4, 0, size-1);
+                    endTime = System.nanoTime();
+                    System.out.println("Tiempo para metodo mergesort de " + size + " elementos: " + (endTime - startTime) + " nanosegundos");
+                    System.out.println();
+        }
+    }
+    public static void bubbleSort(double[] arreglo) {
+        int n = arreglo.length;
+            for (int i = 0; i < n - 1; i++) {
+                for (int j = 0; j < n - i - 1; j++) {
+                    if (arreglo[j] > arreglo[j + 1]) {
+                        double temp = arreglo[j];
+                        arreglo[j] = arreglo[j + 1];
+                        arreglo[j + 1] = temp;
+                    }
+                }
+            }
+    }
+    public static void insertionSort(double[] arreglo) {
+        int n = arreglo.length;
+            for (int i = 1; i < n; ++i) {
+                double key = arreglo[i];
+                    int j = i - 1;
+                    while (j >= 0 && arreglo[j] > key) {
+                        arreglo[j + 1] = arreglo[j];
+                        j = j - 1;
+                    }
+                arreglo[j + 1] = key;
+            }
+    }
+    public static void selectionSort(double[] arreglo) {
+        int n = arreglo.length;
+        for (int i = 0; i < n - 1; i++) {
+            int min_idx = i;
+                for (int j = i + 1; j < n; j++)
+                    if (arreglo[j] < arreglo[min_idx])
+                        min_idx = j;
+                    double temp = arreglo[min_idx];
+                        arreglo[min_idx] = arreglo[i];
+                        arreglo[i] = temp;
+        }
+    }
+    public static void mergeSort(double[] arreglo, int l, int n) {
+        if (l < n) {
+            int x = (l + n) / 2;
+                mergeSort(arreglo, l, x);
+                mergeSort(arreglo, x + 1, n);
+                merge(arreglo, l, x, n);
+        }
+    }
+    public static void merge(double[] arreglo, int l, int m, int n) {
+        int numero_1 = m - l + 1;
+        int numero_2 = n - m;
+            double[] L = new double[numero_1];
+            double[] R = new double[numero_2];
+                for (int i = 0; i < numero_1; ++i)
+                    L[i] = arreglo[l + i];
+                for (int j = 0; j < numero_2; ++j)
+                    R[j] = arreglo[m + 1 + j];  
+        int i = 0, j = 0;
+        int k = l;
+            while (i < numero_1 && j < numero_2) {
+                if (L[i] <= R[j]) {
+                    arreglo[k] = L[i];
+                    i++;
+                } else {
+                    arreglo[k] = R[j];
+                    j++;
+                }
+            k++;
+        }
+            while (i < numero_1) {
+                arreglo[k] = L[i];
+                i++;
+            k++;
+        }
+    }
+}

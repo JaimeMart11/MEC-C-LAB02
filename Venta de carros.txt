@@ -1,0 +1,92 @@
+import java.util.Scanner;
+    public class Ventacarros {
+        private String marca;
+        private String modelo;
+        private String color;
+        private int kilometraje;
+    public Ventacarros(String marca, String modelo, String color, int kilometraje) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.color = color;
+        this.kilometraje = kilometraje;
+    }
+    public String getMarca() {
+        return marca;
+    }
+    public String getModelo() {
+        return modelo;
+    }
+    public String getColor() {
+        return color;
+    }
+    public int getKilometraje() {
+        return kilometraje;
+    }
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+    public void setColor(String color) {
+        this.color = color;
+    }
+    public void setKilometraje(int kilometraje) {
+        this.kilometraje = kilometraje;
+    }
+    public String toString() {
+        return "Carro{" +
+                "marca='" + marca + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", color='" + color + '\'' +
+                ", kilometraje=" + kilometraje +
+                '}';
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese la cantidad de carros: ");
+        int n = scanner.nextInt();
+        Ventacarros[] carros = new Ventacarros[n];
+        for (int i = 0; i < n; i++) {
+            System.out.println("Ingrese los datos del carro " + (i+1) + ":");
+            System.out.print("Marca: ");
+            String marca = scanner.next();
+            System.out.print("Modelo: ");
+            String modelo = scanner.next();
+            System.out.print("Color: ");
+            String color = scanner.next();
+            System.out.print("Kilometraje: ");
+            int kilometraje = scanner.nextInt();
+            carros[i] = new Ventacarros(marca, modelo, color, kilometraje);
+        }
+        System.out.println("Carros antes del ordenamiento: ");
+        for (int i = 0; i < n; i++) {
+            System.out.println(carros[i]);
+        }
+        System.out.print("Elija el método de ordenamiento (1 para bubble sort, 2 para mergesort): ");
+        int opcion = scanner.nextInt();
+        switch (opcion) {
+            case 1:
+                bubbleSort(carros);
+                break;
+            case 2:
+                mergeSort(carros, 0, n-1);
+                break;
+            default:
+                System.out.println("Opción inválida.");
+                return;
+        }
+        System.out.println("Carros después del ordenamiento: ");
+        for (int i = 0; i < n; i++) {
+            System.out.println(carros[i]);
+        }
+    }
+    private static void bubbleSort(Ventacarros[] carros) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    private static void mergeSort(Ventacarros[] carros, int i, int i0) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+}
